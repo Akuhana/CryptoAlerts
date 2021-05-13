@@ -14,5 +14,7 @@ CryptoAlerts is an application for creating price alerts with Binance API.
 
 DO NOT UNDER ANY CIRCUMSTANCES enable the withdrawal restriction.
 
-3. Start the application and enter your API key and secret key. You are now ready to set some price alerts.
+3. Download the application from [here](https://github.com/LePython/CryptoAlerts/releases/tag/v0.1-beta)
+
+4. Start the application and enter your API key and secret key. You are now ready to set some price alerts.
 
