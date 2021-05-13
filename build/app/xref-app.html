@@ -18,8 +18,7 @@
   <a target="code" href="///C:/Users/nikar/Desktop/Day%20Trading/BinanceFutures/app.py" type="text/plain"><tt>app.py</tt></a>
 <span class="moduletype">Script</span>  <div class="import">
 imports:
-    <a href="#CryptoAlerts">CryptoAlerts</a>
- &#8226;   <a href="#PyQt5.QtCore">PyQt5.QtCore</a>
+    <a href="#PyQt5.QtCore">PyQt5.QtCore</a>
  &#8226;   <a href="#PyQt5.QtGui">PyQt5.QtGui</a>
  &#8226;   <a href="#PyQt5.QtMultimedia">PyQt5.QtMultimedia</a>
  &#8226;   <a href="#PyQt5.QtWidgets">PyQt5.QtWidgets</a>
@@ -31,6 +30,7 @@ imports:
  &#8226;   <a href="#collections">collections</a>
  &#8226;   <a href="#collections.abc">collections.abc</a>
  &#8226;   <a href="#copyreg">copyreg</a>
+ &#8226;   <a href="#cryptoalerts">cryptoalerts</a>
  &#8226;   <a href="#encodings">encodings</a>
  &#8226;   <a href="#encodings.aliases">encodings.aliases</a>
  &#8226;   <a href="#encodings.ascii">encodings.ascii</a>
@@ -158,6 +158,7 @@ imports:
  &#8226;   <a href="#functools">functools</a>
  &#8226;   <a href="#heapq">heapq</a>
  &#8226;   <a href="#io">io</a>
+ &#8226;   <a href="#json">json</a>
  &#8226;   <a href="#keyword">keyword</a>
  &#8226;   <a href="#linecache">linecache</a>
  &#8226;   <a href="#locale">locale</a>
@@ -168,7 +169,6 @@ imports:
  &#8226;   <a href="#pyi_rth_multiprocessing.py">pyi_rth_multiprocessing.py</a>
  &#8226;   <a href="#pyi_rth_pkgres.py">pyi_rth_pkgres.py</a>
  &#8226;   <a href="#pyi_rth_pyqt5.py">pyi_rth_pyqt5.py</a>
- &#8226;   <a href="#queue">queue</a>
  &#8226;   <a href="#re">re</a>
  &#8226;   <a href="#reprlib">reprlib</a>
  &#8226;   <a href="#sre_compile">sre_compile</a>
@@ -344,17 +344,6 @@ imported by:
 </div>
 
 <div class="node">
-  <a name="'gevent.event'"></a>
-  <a target="code" href="" type="text/plain"><tt>'gevent.event'</tt></a>
-<span class="moduletype">MissingModule</span>  <div class="import">
-imported by:
-    <a href="#apscheduler.schedulers.gevent">apscheduler.schedulers.gevent</a>
-
-  </div>
-
-</div>
-
-<div class="node">
   <a name="'gevent.lock'"></a>
   <a target="code" href="" type="text/plain"><tt>'gevent.lock'</tt></a>
 <span class="moduletype">MissingModule</span>  <div class="import">
@@ -507,27 +496,6 @@ imported by:
 imported by:
     <a href="#requests.compat">requests.compat</a>
  &#8226;   <a href="#websocket._cookiejar">websocket._cookiejar</a>
-
-  </div>
-
-</div>
-
-<div class="node">
-  <a name="CryptoAlerts"></a>
-  <a target="code" href="///C:/Users/nikar/Desktop/Day%20Trading/BinanceFutures/CryptoAlerts.py" type="text/plain"><tt>CryptoAlerts</tt></a>
-<span class="moduletype">SourceModule</span>  <div class="import">
-imports:
-    <a href="#binance_f">binance_f</a>
- &#8226;   <a href="#binance_f.exception.binanceapiexception">binance_f.exception.binanceapiexception</a>
- &#8226;   <a href="#binance_f.model">binance_f.model</a>
- &#8226;   <a href="#json">json</a>
- &#8226;   <a href="#logging">logging</a>
- &#8226;   <a href="#os">os</a>
-
-  </div>
-  <div class="import">
-imported by:
-    <a href="#app.py">app.py</a>
 
   </div>
 
@@ -2516,8 +2484,7 @@ imported by:
   <a target="code" href="///C:/users/nikar/appdata/local/programs/python/python38/lib/site-packages/apscheduler/schedulers/gevent.py" type="text/plain"><tt>apscheduler.schedulers.gevent</tt></a>
 <span class="moduletype">SourceModule</span>  <div class="import">
 imports:
-    <a href="#'gevent.event'">'gevent.event'</a>
- &#8226;   <a href="#'gevent.lock'">'gevent.lock'</a>
+    <a href="#'gevent.lock'">'gevent.lock'</a>
  &#8226;   <a href="#__future__">__future__</a>
  &#8226;   <a href="#apscheduler.executors.gevent">apscheduler.executors.gevent</a>
  &#8226;   <a href="#apscheduler.schedulers">apscheduler.schedulers</a>
@@ -3836,14 +3803,14 @@ imports:
   </div>
   <div class="import">
 imported by:
-    <a href="#CryptoAlerts">CryptoAlerts</a>
- &#8226;   <a href="#binance_f.base">binance_f.base</a>
+    <a href="#binance_f.base">binance_f.base</a>
  &#8226;   <a href="#binance_f.constant">binance_f.constant</a>
  &#8226;   <a href="#binance_f.exception">binance_f.exception</a>
  &#8226;   <a href="#binance_f.impl">binance_f.impl</a>
  &#8226;   <a href="#binance_f.model">binance_f.model</a>
  &#8226;   <a href="#binance_f.requestclient">binance_f.requestclient</a>
  &#8226;   <a href="#binance_f.subscriptionclient">binance_f.subscriptionclient</a>
+ &#8226;   <a href="#cryptoalerts">cryptoalerts</a>
 
   </div>
 
@@ -3963,12 +3930,12 @@ imports:
   </div>
   <div class="import">
 imported by:
-    <a href="#CryptoAlerts">CryptoAlerts</a>
- &#8226;   <a href="#binance_f.impl.restapiinvoker">binance_f.impl.restapiinvoker</a>
+    <a href="#binance_f.impl.restapiinvoker">binance_f.impl.restapiinvoker</a>
  &#8226;   <a href="#binance_f.impl.utils.apisignature">binance_f.impl.utils.apisignature</a>
  &#8226;   <a href="#binance_f.impl.utils.inputchecker">binance_f.impl.utils.inputchecker</a>
  &#8226;   <a href="#binance_f.impl.utils.jsonwrapper">binance_f.impl.utils.jsonwrapper</a>
  &#8226;   <a href="#binance_f.impl.websocketconnection">binance_f.impl.websocketconnection</a>
+ &#8226;   <a href="#cryptoalerts">cryptoalerts</a>
 
   </div>
 
@@ -4373,8 +4340,7 @@ imports:
   </div>
   <div class="import">
 imported by:
-    <a href="#CryptoAlerts">CryptoAlerts</a>
- &#8226;   <a href="#binance_f.impl.restapirequestimpl">binance_f.impl.restapirequestimpl</a>
+    <a href="#binance_f.impl.restapirequestimpl">binance_f.impl.restapirequestimpl</a>
  &#8226;   <a href="#binance_f.impl.utils.channels">binance_f.impl.utils.channels</a>
  &#8226;   <a href="#binance_f.impl.websocketrequestimpl">binance_f.impl.websocketrequestimpl</a>
  &#8226;   <a href="#binance_f.model.accountinformation">binance_f.model.accountinformation</a>
@@ -4429,6 +4395,7 @@ imported by:
  &#8226;   <a href="#binance_f.model.tickerpricechangestatistics">binance_f.model.tickerpricechangestatistics</a>
  &#8226;   <a href="#binance_f.model.trade">binance_f.model.trade</a>
  &#8226;   <a href="#binance_f.subscriptionclient">binance_f.subscriptionclient</a>
+ &#8226;   <a href="#cryptoalerts">cryptoalerts</a>
 
   </div>
 
@@ -5293,6 +5260,24 @@ imports:
   <div class="import">
 imported by:
     <a href="#binance_f">binance_f</a>
+
+  </div>
+
+</div>
+
+<div class="node">
+  <a name="binanceapi"></a>
+  <a target="code" href="///C:/Users/nikar/Desktop/Day%20Trading/BinanceFutures/binanceapi.py" type="text/plain"><tt>binanceapi</tt></a>
+<span class="moduletype">SourceModule</span>  <div class="import">
+imports:
+    <a href="#json">json</a>
+ &#8226;   <a href="#os">os</a>
+ &#8226;   <a href="#time">time</a>
+
+  </div>
+  <div class="import">
+imported by:
+    <a href="#cryptoalerts">cryptoalerts</a>
 
   </div>
 
@@ -6976,6 +6961,27 @@ imported by:
  &#8226;   <a href="#multiprocessing.reduction">multiprocessing.reduction</a>
  &#8226;   <a href="#pickle">pickle</a>
  &#8226;   <a href="#re">re</a>
+
+  </div>
+
+</div>
+
+<div class="node">
+  <a name="cryptoalerts"></a>
+  <a target="code" href="///C:/Users/nikar/Desktop/Day%20Trading/BinanceFutures/cryptoalerts.py" type="text/plain"><tt>cryptoalerts</tt></a>
+<span class="moduletype">SourceModule</span>  <div class="import">
+imports:
+    <a href="#binance_f">binance_f</a>
+ &#8226;   <a href="#binance_f.exception.binanceapiexception">binance_f.exception.binanceapiexception</a>
+ &#8226;   <a href="#binance_f.model">binance_f.model</a>
+ &#8226;   <a href="#binanceapi">binanceapi</a>
+ &#8226;   <a href="#logging">logging</a>
+ &#8226;   <a href="#time">time</a>
+
+  </div>
+  <div class="import">
+imported by:
+    <a href="#app.py">app.py</a>
 
   </div>
 
@@ -11535,7 +11541,7 @@ imports:
  &#8226;   <a href="#importlib">importlib</a>
  &#8226;   <a href="#importlib._bootstrap">importlib._bootstrap</a>
  &#8226;   <a href="#importlib._bootstrap_external">importlib._bootstrap_external</a>
- &#8226;   <a href="#importlib.machinery">importlib.machinery</a>
+ &#8226;   <a href="#importlib.abc">importlib.abc</a>
  &#8226;   <a href="#sys">sys</a>
  &#8226;   <a href="#types">types</a>
  &#8226;   <a href="#warnings">warnings</a>
@@ -11634,7 +11640,8 @@ imports:
   </div>
   <div class="import">
 imported by:
-    <a href="#importlib.metadata">importlib.metadata</a>
+    <a href="#importlib">importlib</a>
+ &#8226;   <a href="#importlib.metadata">importlib.metadata</a>
  &#8226;   <a href="#importlib.resources">importlib.resources</a>
  &#8226;   <a href="#importlib.util">importlib.util</a>
  &#8226;   <a href="#win32ctypes.core">win32ctypes.core</a>
@@ -11661,7 +11668,6 @@ imported by:
  &#8226;   <a href="#PyInstaller.lib.modulegraph.modulegraph">PyInstaller.lib.modulegraph.modulegraph</a>
  &#8226;   <a href="#ctypes.util">ctypes.util</a>
  &#8226;   <a href="#imp">imp</a>
- &#8226;   <a href="#importlib">importlib</a>
  &#8226;   <a href="#importlib.abc">importlib.abc</a>
  &#8226;   <a href="#inspect">inspect</a>
  &#8226;   <a href="#pkg_resources">pkg_resources</a>
@@ -11999,13 +12005,14 @@ imports:
   </div>
   <div class="import">
 imported by:
-    <a href="#CryptoAlerts">CryptoAlerts</a>
- &#8226;   <a href="#PyInstaller.utils.hooks.conda">PyInstaller.utils.hooks.conda</a>
+    <a href="#PyInstaller.utils.hooks.conda">PyInstaller.utils.hooks.conda</a>
  &#8226;   <a href="#PyInstaller.utils.hooks.qt">PyInstaller.utils.hooks.qt</a>
+ &#8226;   <a href="#app.py">app.py</a>
  &#8226;   <a href="#binance_f.impl.utils">binance_f.impl.utils</a>
  &#8226;   <a href="#binance_f.impl.utils.channels">binance_f.impl.utils.channels</a>
  &#8226;   <a href="#binance_f.impl.utils.jsonwrapper">binance_f.impl.utils.jsonwrapper</a>
  &#8226;   <a href="#binance_f.impl.utils.urlparamsbuilder">binance_f.impl.utils.urlparamsbuilder</a>
+ &#8226;   <a href="#binanceapi">binanceapi</a>
  &#8226;   <a href="#json.decoder">json.decoder</a>
  &#8226;   <a href="#json.encoder">json.encoder</a>
  &#8226;   <a href="#json.scanner">json.scanner</a>
@@ -12178,8 +12185,7 @@ imports:
   </div>
   <div class="import">
 imported by:
-    <a href="#CryptoAlerts">CryptoAlerts</a>
- &#8226;   <a href="#PyInstaller.log">PyInstaller.log</a>
+    <a href="#PyInstaller.log">PyInstaller.log</a>
  &#8226;   <a href="#app.py">app.py</a>
  &#8226;   <a href="#apscheduler.executors.base">apscheduler.executors.base</a>
  &#8226;   <a href="#apscheduler.executors.base_py3">apscheduler.executors.base_py3</a>
@@ -12193,6 +12199,7 @@ imported by:
  &#8226;   <a href="#chardet.codingstatemachine">chardet.codingstatemachine</a>
  &#8226;   <a href="#chardet.universaldetector">chardet.universaldetector</a>
  &#8226;   <a href="#concurrent.futures._base">concurrent.futures._base</a>
+ &#8226;   <a href="#cryptoalerts">cryptoalerts</a>
  &#8226;   <a href="#hashlib">hashlib</a>
  &#8226;   <a href="#http.cookiejar">http.cookiejar</a>
  &#8226;   <a href="#lib2to3.btm_matcher">lib2to3.btm_matcher</a>
@@ -13375,8 +13382,7 @@ imports:
   </div>
   <div class="import">
 imported by:
-    <a href="#CryptoAlerts">CryptoAlerts</a>
- &#8226;   <a href="#PyInstaller">PyInstaller</a>
+    <a href="#PyInstaller">PyInstaller</a>
  &#8226;   <a href="#PyInstaller.__main__">PyInstaller.__main__</a>
  &#8226;   <a href="#PyInstaller.archive.pyz_crypto">PyInstaller.archive.pyz_crypto</a>
  &#8226;   <a href="#PyInstaller.archive.writers">PyInstaller.archive.writers</a>
@@ -13417,6 +13423,7 @@ imported by:
  &#8226;   <a href="#asyncio.unix_events">asyncio.unix_events</a>
  &#8226;   <a href="#asyncio.windows_utils">asyncio.windows_utils</a>
  &#8226;   <a href="#bdb">bdb</a>
+ &#8226;   <a href="#binanceapi">binanceapi</a>
  &#8226;   <a href="#bz2">bz2</a>
  &#8226;   <a href="#certifi.core">certifi.core</a>
  &#8226;   <a href="#concurrent.futures.process">concurrent.futures.process</a>
@@ -14587,8 +14594,7 @@ imports:
   </div>
   <div class="import">
 imported by:
-    <a href="#app.py">app.py</a>
- &#8226;   <a href="#concurrent.futures.process">concurrent.futures.process</a>
+    <a href="#concurrent.futures.process">concurrent.futures.process</a>
  &#8226;   <a href="#concurrent.futures.thread">concurrent.futures.thread</a>
  &#8226;   <a href="#logging.handlers">logging.handlers</a>
  &#8226;   <a href="#multiprocessing.dummy">multiprocessing.dummy</a>
@@ -16426,7 +16432,9 @@ imported by:
  &#8226;   <a href="#binance_f.impl.utils.inputchecker">binance_f.impl.utils.inputchecker</a>
  &#8226;   <a href="#binance_f.impl.utils.timeservice">binance_f.impl.utils.timeservice</a>
  &#8226;   <a href="#binance_f.impl.websocketrequestimpl">binance_f.impl.websocketrequestimpl</a>
+ &#8226;   <a href="#binanceapi">binanceapi</a>
  &#8226;   <a href="#concurrent.futures._base">concurrent.futures._base</a>
+ &#8226;   <a href="#cryptoalerts">cryptoalerts</a>
  &#8226;   <a href="#datetime">datetime</a>
  &#8226;   <a href="#email._parseaddr">email._parseaddr</a>
  &#8226;   <a href="#email.generator">email.generator</a>

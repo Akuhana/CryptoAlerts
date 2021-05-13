@@ -1,13 +1,13 @@
 import logging
 import sys, os
-from PyQt5.QtWidgets import QApplication, QLabel, QMainWindow, QWidget, QLineEdit, QPushButton, QGridLayout, QFormLayout, QDialog, QBoxLayout, QComboBox, QListView, QTableView, QTableWidget, QTableWidgetItem, QMessageBox, QDialogButtonBox, QVBoxLayout
+from PyQt5.QtWidgets import QApplication, QLabel, QMainWindow, QWidget, QLineEdit, QPushButton, QGridLayout, QFormLayout, QDialog, QBoxLayout, QComboBox, QListView, QTableView, QTableWidget, QTableWidgetItem, QMessageBox, QDialogButtonBox, QVBoxLayout, QInputDialog
 from PyQt5.QtCore import Qt, QTimer, QUrl
 from PyQt5.QtMultimedia import QSound, QMediaPlayer, QMediaContent
 from PyQt5.QtGui import QStandardItemModel
 
-import threading, queue
-import time
-from CryptoAlerts import Futures
+import threading, time
+import json
+from cryptoalerts import Futures
 
 #logging.basicConfig(format="%(message)s", level=logging.INFO)
 log_file = 'logs.log'
@@ -15,9 +15,53 @@ logging.basicConfig(format='%(asctime)s - %(levelname)s: %(message)s',
                     datefmt='%d/%m/%Y %I:%M:%S %p',
                     level=logging.INFO,
                     handlers=[
-                        logging.FileHandler(log_file),
+                        #logging.FileHandler(log_file),
                         logging.StreamHandler()
                     ])
+
+class APIInputDialog(QDialog):
+    config_dir = ""
+    def __init__(self, config_dir, parent=None):
+        super().__init__(parent=parent)
+        self.config_dir = config_dir
+        
+        self.setWindowTitle("Enter your Binance API keys")
+
+        btn = QDialogButtonBox.Ok | QDialogButtonBox.Cancel
+        self.buttonBox = QDialogButtonBox(btn)
+        self.buttonBox.accepted.connect(self.accept)
+        self.buttonBox.rejected.connect(self.reject)
+                
+        self.layout         = QVBoxLayout()
+        self.api_msg        = QLabel("Your api key: ")
+        self.api_textbox    = QLineEdit(self)
+        self.secret_msg     = QLabel("Your secret key: ")
+        self.secret_textbox = QLineEdit(self)
+        
+        self.api_textbox.setMinimumWidth(340)
+        self.secret_textbox.setMinimumWidth(340)
+        
+        self.layout.addWidget(self.api_msg)
+        self.layout.addWidget(self.api_textbox)
+        self.layout.addWidget(self.secret_msg)
+        self.layout.addWidget(self.secret_textbox)
+        self.layout.addWidget(self.buttonBox)
+        
+        self.setLayout(self.layout)
+        
+        ok_btn = self.buttonBox.button(QDialogButtonBox.Ok)
+        ok_btn.clicked.connect(lambda: self.dump_keys())
+    
+    def dump_keys(self):
+        api_key     = self.api_textbox.text()
+        secret_key  = self.secret_textbox.text()
+        if api_key and secret_key:
+            api_keys = {
+                "api_key": api_key,
+                "api_secret": secret_key
+                }
+            with open(os.path.join(self.config_dir, "config.json"), "w") as f:
+                json.dump(api_keys, f)
 
 class PriceAlertDialog(QDialog):
     def __init__(self, price=0, symbol="btcusdt", typ="below", parent=None):
@@ -31,13 +75,13 @@ class PriceAlertDialog(QDialog):
         self.buttonBox.rejected.connect(self.reject)
 
         self.layout = QVBoxLayout()
-        self.msg = QLabel(f"An alert was triggered for {symbol.upper()}, because the price was {typ} {price}.")
+        self.msg = QLabel(f"An alert was triggered for {symbol.upper()}, because the price was {typ.lower()} {price}.")
         self.layout.addWidget(self.msg)
         self.layout.addWidget(self.buttonBox)
         self.setLayout(self.layout)
             
     def set_ticker(self, symbol, price, typ):
-        self.msg.setText(f"An alert was triggered for {symbol.upper()}, because the price was {typ} {price}.")
+        self.msg.setText(f"An alert was triggered for {symbol.upper()}, because the price was {typ.lower()} {price}.")
         
     def play_sound(self):
         self.alert_sound = QSound("C:/Users/nikar/Desktop/Day Trading/BinanceFutures/alert.wav")
@@ -46,9 +90,13 @@ class PriceAlertDialog(QDialog):
 
 
 class MainWindow(QWidget):
+    __exit = False
+    futures = None
+    
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-
+        
+        
         self.title  = "CryptoAlerts"
         self.left   = 50
         self.top    = 50
@@ -60,15 +108,28 @@ class MainWindow(QWidget):
         
         self.InitUI()
 
-        self.futures = Futures(True)
-
-        self.timer = QTimer()
-        self.timer.timeout.connect(lambda: self.ticker_price.setText(str(self.futures.get_price(self.ticker))))
-        self.timer.start(1000)
+        self.create_config()
         
-        self.check_alerts = threading.Thread(target=self.check_prices, daemon=True)
-        self.check_alerts.start()
+        self.check_alerts = threading.Thread(target=self.check_prices)
+        if self.futures:
+            self.check_alerts.start()
     
+    def create_config(self):
+        """ Create new folder and config.json file in local appdata directory to store the api keys
+        """
+        config_dir = os.path.join(os.getenv("LOCALAPPDATA"), "CryptoAlerts")
+        if not os.path.exists(config_dir) or not os.path.exists(os.path.join(config_dir, "config.json")):
+            try:
+                os.mkdir(config_dir)
+            except:
+                print(f"Couldn't create a directory in {config_dir}")
+                
+            input_d = APIInputDialog(config_dir)
+            acc = input_d.exec()
+            if acc == QDialog.Accepted:
+                self.futures = Futures(True)
+        else:
+            self.futures = Futures(True)
 
     def InitUI(self):
         self.setWindowTitle(self.title)
@@ -121,17 +182,27 @@ class MainWindow(QWidget):
 
 
     def remove_from_list(self):
+        """Removes a symbol from the list (which disables the alert)
+        """
         for row in self.alert_list.selectedItems():
             self.alert_list.removeRow(row.row())
     
     def check_prices(self):
+        """Constantly goes through a list of symbols and checks if price has reached a given number (runs in a thread)
+        """
         while True:
+            if self.__exit:
+                break
+            
+            self.set_ticker_price()
+            
             for row in range(self.alert_list.rowCount()):
                 if self.alert_list.item(row, 3).text() == "False":
                     symbol      = self.alert_list.item(row, 0).text().lower()
                     alert_price = self.alert_list.item(row, 1).text()
                     alert_type  = self.alert_list.item(row, 2).text()
                     price       = self.futures.get_price(symbol)
+                        
                     if alert_type == "Below" and price < float(alert_price):
                         self.alert_list.item(row, 3).setText("True")
                         self.dlg.set_ticker(symbol, alert_price, alert_type)
@@ -145,7 +216,9 @@ class MainWindow(QWidget):
                     
             time.sleep(0.5)
 
-    def add_to_list(self, row=None):
+    def add_to_list(self):
+        """Adds an item to the list
+        """
         self.alert_list.insertRow(self.alert_list.rowCount())
             
         tck = QTableWidgetItem()
@@ -162,23 +235,23 @@ class MainWindow(QWidget):
         self.alert_list.setItem(self.alert_list.rowCount()-1, 1, price)
         self.alert_list.setItem(self.alert_list.rowCount()-1, 2, typ)
         self.alert_list.setItem(self.alert_list.rowCount()-1, 3, triggered)
-        
-        
-        # Check the price to trigger the alert
-        #self.check_price(self.ticker, float(self.alert_pricebox.text()), alert_type, self.alert_list.rowCount()-1)
-
 
     def change_ticker(self):
         self.ticker = self.ticker_textbox.text()
         self.ticker_l.setText(self.ticker.upper())
     
+    def set_ticker_price(self):
+        self.ticker_price.setText(str(self.futures.get_price(self.ticker)))
+    
     def closeEvent(self, event):
-        self.timer.stop()
+        # Breaks the while loop to end the thread
+        self.__exit = True
         
-app = QApplication(sys.argv)
+if __name__ == "__main__":
+    app = QApplication(sys.argv)
 
-window = MainWindow()
-window.show()
+    window = MainWindow()
+    window.show()
 
-# Start the event loop.
-app.exec_()
+    # Start the event loop.
+    app.exec_()
